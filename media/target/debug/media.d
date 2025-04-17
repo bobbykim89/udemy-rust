@@ -1,1 +1,1 @@
-/Users/skim585/Documents/projects/udemy-rust/media/target/debug/media: /Users/skim585/Documents/projects/udemy-rust/media/src/main.rs
+/Users/skim585/Documents/projects/udemy-rust/media/target/debug/media: /Users/skim585/Documents/projects/udemy-rust/media/src/content/catalog.rs /Users/skim585/Documents/projects/udemy-rust/media/src/content/media.rs /Users/skim585/Documents/projects/udemy-rust/media/src/content/mod.rs /Users/skim585/Documents/projects/udemy-rust/media/src/main.rs
