@@ -1,75 +1,16 @@
-#[derive(Debug)]
-enum Media {
-    Book { title: String, author: String },
-    Movie { title: String, director: String },
-    AudioBook { title: String },
-    Podcast(u32),
-    Placeholder
-}
+mod content;
 
-impl Media {
-    fn description(&self) -> String {
-        // if let Media::Book {title, author} = self {
-        //     format!("Book: {} {}", title, author)
-        // } else if let Media::Movie {title, director} = self {
-        //     format!("Movie: {} {}", title, director)
-        // } else if let Media::AudioBook { title } = self {
-        //     format!("Audiobook: {}", title)
-        // } else {
-        //     String::from("Media description")
-        // }
-        match self {
-            Media::Book { title, author } => {
-                format!("Book: {} {}", title, author)
-            },
-            Media::Movie { title, director } => {
-                format!("Movie: {} {}", title, director)
-            },
-            Media::AudioBook { title } => {
-                format!("Audiobook: {}", title)
-            }
-            Media::Podcast(episode_number) => {
-                format!("Podcast: {}", episode_number)
-            }
-            Media::Placeholder => {
-                format!("Placeholder")
-            }
-        }
-    }
-}
+use content::media::Media;
+use content::catalog::Catalog;
 
-#[derive(Debug)]
-struct Catalog {
-    items: Vec<Media>
-}
+// enum MightHaveAValue<'a> {
+//     ThereIsAValue(&'a Media),
+//     NoValueAvailable
+// }
 
-impl Catalog {
-    fn new() -> Self {
-        Catalog { items: vec![] }
-    }
-
-    fn add(&mut self, media: Media)  {
-        self.items.push(media);
-    }
-    fn get_by_index (&self, index: usize) -> MightHaveAValue {
-        if self.items.len() > index {
-            // good result
-            // MighHaveAValue::ThereIsAValue(&self.items[index])
-            return MightHaveAValue::ThereIsAValue(&self.items[index]);
-        }
-        // bad result
-        MightHaveAValue::NoValueAvailable
-    }
-}
-
-enum MightHaveAValue<'a> {
-    ThereIsAValue(&'a Media),
-    NoValueAvailable
-}
-
-fn print_media(media: Media) {
-    println!("{:#?}", media);
-}
+// fn print_media(media: Media) {
+//     println!("{:#?}", media);
+// }
 
 fn main() {
     let audiobook = Media::AudioBook { title: String::from("An Adventure of Pollito") };
@@ -104,14 +45,23 @@ fn main() {
     //         println!("Nothing at that index");
     //     }
     // }
-    // let item = catalog.get_by_index(40);
+    let item = catalog.get_by_index(0);
+    let placeholder = Media::Placeholder;
     // println!("{:#?}", item);
-    match catalog.get_by_index(100) {
-        MightHaveAValue::ThereIsAValue(value) => {
-            println!("Item: {:#?}", value);
-        },
-        MightHaveAValue::NoValueAvailable => {
-            println!("No value available");
-        }
-    }
+    // match catalog.get_by_index(1) {
+    //     Some(value) => {
+    //         println!("Item: {:#?}", value);
+    //     },
+    //     None => {
+    //         println!("No value available");
+    //     }
+    // }
+    // if let Some(value) = catalog.get_by_index(9999) {
+    //     println!("Item in pattern match: {:#?}", value);
+    // } else {
+    //     println!("No value!");
+    // }
+    // println!("{:#?}", item.unwrap());
+    // println!("{:#?}", item.expect("expected there to be an item here!"));
+    println!("{:#?}", item.unwrap_or(&placeholder));
 }
