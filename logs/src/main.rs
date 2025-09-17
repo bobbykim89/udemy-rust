@@ -36,27 +36,28 @@ fn main() {
 
     // let mut error_logs = vec![];
 
-    match fs::read_to_string("logs.txt") {
-        Ok(text_that_was_read) => {
-            // println!("{}", text_that_was_read.len())
-            let error_logs = extract_errors(text_that_was_read.as_str());
-            // println!("{:#?}", error_logs);
-            // error_logs = extract_errors(text_that_was_read.as_str());
-            // writing data to a file:
-            match fs::write("errors.txt", error_logs.join("\n")) {
-                Ok(..) => println!("write errors.txt"),
-                Err(reason_write_fialed) => {
-                    println!("Writing of errrors.txt filed: {}", reason_write_fialed)
-                }
-            }
-        }
-        Err(why_this_failed) => {
-            println!("Failed to read file: {}", why_this_failed)
-        }
-    }
+    // match fs::read_to_string("logs.txt") {
+    //     Ok(text_that_was_read) => {
+    //         // println!("{}", text_that_was_read.len())
+    //         let error_logs = extract_errors(text_that_was_read.as_str());
+    //         // println!("{:#?}", error_logs);
+    //         // error_logs = extract_errors(text_that_was_read.as_str());
+    //         // writing data to a file:
+    //         match fs::write("errors.txt", error_logs.join("\n")) {
+    //             Ok(..) => println!("write errors.txt"),
+    //             Err(reason_write_fialed) => {
+    //                 println!("Writing of errrors.txt filed: {}", reason_write_fialed)
+    //             }
+    //         }
+    //     }
+    //     Err(why_this_failed) => {
+    //         println!("Failed to read file: {}", why_this_failed)
+    //     }
+    // }
     // println!("{:#?}", error_logs);
-
-    
+    let text = fs::read_to_string("logs.txt").expect("faied to read logs.txt");
+    let error_logs = extract_errors(text.as_str());
+    fs::write("errors.txt", error_logs.join("\n")).expect("failed to write errors.txt");
 }
 
 fn validate_email (email: String) -> Result<(), Error> {
