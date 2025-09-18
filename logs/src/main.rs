@@ -1,38 +1,38 @@
 use std::fs;
 use std::io::Error;
 
-fn main() {
+fn main() -> Result<(), Error> {
     // let text = fs::read_to_string("logs.txt");
     // println!("{:#?}", text);
 
-    match divide(5.0, 0.0) {
-        Ok(result_of_difision) => {
-            println!("{}", result_of_difision)
-        }
-        Err(what_went_wrong) => {
-            println!("{}", what_went_wrong)
-        }
-    }
-    println!("{:#?}", divide(5.0, 3.0));
+    // match divide(5.0, 0.0) {
+    //     Ok(result_of_difision) => {
+    //         println!("{}", result_of_difision)
+    //     }
+    //     Err(what_went_wrong) => {
+    //         println!("{}", what_went_wrong)
+    //     }
+    // }
+    // println!("{:#?}", divide(5.0, 3.0));
 
-    match validate_email(String::from("asdf@gmail.com")) {
-        Ok(..) => print!("Email is valid\n"),
-        Err(reasion_this_failed_validation) => {
-            println!("{}", reasion_this_failed_validation)
-        }
-    }
+    // match validate_email(String::from("asdf@gmail.com")) {
+    //     Ok(..) => print!("Email is valid\n"),
+    //     Err(reasion_this_failed_validation) => {
+    //         println!("{}", reasion_this_failed_validation)
+    //     }
+    // }
 
-    let ingredients = vec![
-        String::from("Cheese"),
-        String::from("Tomatoes"),
-        String::from("Peppers"),
-        // String::from("OLives"),
-    ];
+    // let ingredients = vec![
+    //     String::from("Cheese"),
+    //     String::from("Tomatoes"),
+    //     String::from("Peppers"),
+    //     // String::from("OLives"),
+    // ];
 
-    match validate_ingredients(&ingredients) {
-        Ok(..) => println!("Ingredients are good to go\n"),
-        Err(error) => println!("Failed validation: {}\n", error)
-    }
+    // match validate_ingredients(&ingredients) {
+    //     Ok(..) => println!("Ingredients are good to go\n"),
+    //     Err(error) => println!("Failed validation: {}\n", error)
+    // }
 
     // let mut error_logs = vec![];
 
@@ -55,10 +55,27 @@ fn main() {
     //     }
     // }
     // println!("{:#?}", error_logs);
-    let text = fs::read_to_string("logs.txt").expect("faied to read logs.txt");
+
+    // 81.
+    // let text = fs::read_to_string("logs.txt").expect("faied to read logs.txt");
+    // let error_logs = extract_errors(text.as_str());
+    // fs::write("errors.txt", error_logs.join("\n")).expect("failed to write errors.txt");
+
+    // Ok(())
+    // Err(Error::other("Something went wrong"))
+    // '?' operator gets added onto functions that return a result
+    let text = fs::read_to_string("logs.txt")?;
     let error_logs = extract_errors(text.as_str());
-    fs::write("errors.txt", error_logs.join("\n")).expect("failed to write errors.txt");
+    fs::write("error.txt", error_logs.join("/n"))?;
+
+    Ok(())
 }
+
+/**
+ * Use a match or 'if let' statement: When you're ready to meaningfully deal with an error
+ * Call 'unwrap()' or 'expect()' on the result: Quick debugging, or if you want to crash on an Err()
+ * Use the try operator ('?') to unwrap or progagate the result: When you don't have any way to handle the error in the current function.
+ */
 
 fn validate_email (email: String) -> Result<(), Error> {
     if email.contains("@") {

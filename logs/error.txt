@@ -1,0 +1,1 @@
+ERROR 14:33:45 Failed to connect to the database./nERROR 14:39:05 Could not write to configuration file./nERROR 14:44:15 Backup failed due to insufficient space./nERROR 14:48:58 Unable to access remote server./nERROR 14:51:40 Failed to process transaction ID: 2345./nERROR 14:56:20 Unhandled exception in main thread.
